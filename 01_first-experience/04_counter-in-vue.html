@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id="app"></div>
+  
+  <script src="./lib/vue.js"></script>
+  <script>
+    // 声明式编程: 声明变量和方法,绑定到元素上,实际操作由vue完成
+    Vue.createApp({
+      template: `
+        <div>
+          <h2>{{ counter }}</h2>
+          <button @click="increment">+</button>
+          <button @click="decrement">-</button>
+        </div>
+      `,
+      data() {
+        return {
+          counter: 0,
+        }
+      },
+      methods: {
+        increment() {
+          this.counter++;
+        },
+        decrement() {
+          this.counter--
+        }
+      }
+    }).mount('#app');;
+  </script>
+</body>
+</html>
