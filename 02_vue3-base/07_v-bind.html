@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .active {
+        color: red;
+      }
+      .opacity {
+        opacity: 40%;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app"></div>
+
+    <!-- 当元素的属性也需要动态绑定时需要用到v-bind -->
+    <template id="tmp">
+      <img v-bind:src="imageUrl" alt="" />
+      <!-- :是v-bind:的简写 -->
+      <a :href="link">baidu</a>
+      <!-- 对象语法 -->
+      <div :class="{active: isActive}">23333</div>
+      <!-- 数组语法 -->
+      <div :class="['opacity', {active: isActive}]">23333</div>
+      <button @click="toggle">toggle</button>
+      <div :class="['opacity', {active: isActive}]">test<span :style="{color: color}">test</span>test</div>
+      <div :class="['opacity', {active: isActive}]">test<span :style="[{color: color}, {fontSize: fontSize + 'px'}]">test</span>test</div>
+      <div :="obj">23333</div>
+    </template>
+
+    <script src="https://unpkg.com/vue@next"></script>
+    <script>
+      Vue.createApp({
+        template: '#tmp',
+        data() {
+          return {
+            imageUrl:
+              'https://avatars.githubusercontent.com/u/30581883?s=60&v=4',
+            link: 'https://www.baidu.com',
+            isActive: true,
+            color: 'blue',
+            fontSize: 50,
+            obj: {
+              a: 'a',
+              b: 2,
+              c: 'c'
+            }
+          };
+        },
+        methods: {
+          toggle() {
+            this.isActive = !this.isActive;
+          }
+        },
+      }).mount('#app');
+    </script>
+  </body>
+</html>
