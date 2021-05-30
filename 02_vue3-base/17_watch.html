@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="app"></div>
+
+    <template id="tmp">
+      <input type="text" v-model="question" />
+      {{ answer }}
+    </template>
+
+    <script src="https://unpkg.com/vue@next"></script>
+    <script>
+      Vue.createApp({
+        template: '#tmp',
+        data() {
+          return {
+            question: '',
+            answer: '',
+          };
+        },
+        watch: {
+          question(newVal, oldVal) {
+            this.getAnswer();
+          }
+        },
+        methods: {
+          getAnswer() {
+            if (this.question.endsWith('?') && Math.random() < 0.5) {
+              this.answer = 'yes';
+            } else if (this.question.endsWith('?') && Math.random() >= 0.5) {
+              this.answer = 'no';
+            } else {
+              this.answer = 'i don\'t know';
+            }
+          },
+        },
+      }).mount('#app');
+    </script>
+  </body>
+</html>

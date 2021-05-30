@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="app"></div>
+
+    <template id="tmp">
+      <h2>{{info.name}}</h2>
+      <button @click="changeInfo">改变info</button>
+      <button @click="changeInfoName">改变name</button>
+    </template>
+
+    <script src="https://unpkg.com/vue@next"></script>
+    <script>
+      Vue.createApp({
+        template: '#tmp',
+        data() {
+          return {
+            info: {
+              name: 'luckyporo',
+              age: 25
+            }
+          };
+        },
+        watch: {
+          // info无法监听到changeInfoName被调用
+          // 默认情况下侦听器只能监听到数据本身的改变(内部发生变化无法监听到)
+          // 如果想要监听内部数据的变化则需要深度监听
+          // info(newVal, oldVal) {
+          //   console.log('newVal', newVal)
+          //   console.log('oldVal', oldVal)
+          // }
+
+          info: {
+            handler(newVal, oldVal) {
+              console.log('newVal', newVal)
+              console.log('oldVal', oldVal)
+            },
+            deep: true,
+            immediate: true // 立即执行
+          }
+        },
+        methods: {
+          changeInfo() {
+            this.info = {
+              name: 'jack',
+              age: 21
+            }
+          },
+          changeInfoName() {
+            this.info.name = 'tom'
+          }
+        },
+      }).mount('#app');
+    </script>
+  </body>
+</html>

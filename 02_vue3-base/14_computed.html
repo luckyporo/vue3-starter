@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="app"></div>
+
+    <template id="tmp">
+      <!-- 
+        模板语法缺点: 
+          1. 模板中存在大量逻辑,可读性和可维护性差
+          2. 做相同逻辑时存在重复代码
+          3. 多次执行相同表达式运算重复执行,浪费性能
+       -->
+      <h2>full name: {{ firstName + " " + lastName }}</h2>
+      <h2>result: {{ score >= 60 ? "及格" : "不及格"}}</h2>
+      <h2>msg: {{ message.split(" ").reverse().join(" ") }}</h2>
+      <hr />
+      <!-- 
+        方法缺点: 
+        1. 需要调用,方法名不能直观体现模板内插值内容
+        2. 方法也没有缓存,重复执行存在性能浪费
+      -->
+      <h2>full name: {{ getFullName() }}</h2>
+      <h2>result: {{ getResult() }}</h2>
+      <h2>msg: {{ getReverseMessage() }}</h2>
+      <hr>
+      <!-- 计算属性 -->
+      <h2>full name: {{ fullName }}</h2>
+      <h2>result: {{ result }}</h2>
+      <h2>msg: {{ reverseMessage }}</h2>
+    </template>
+
+    <script src="https://unpkg.com/vue@next"></script>
+    <script>
+      Vue.createApp({
+        template: '#tmp',
+        data() {
+          return {
+            firstName: 'brad',
+            lastName: 'pei',
+            score: 59,
+            message: 'hello world',
+          };
+        },
+        methods: {
+          getFullName() {
+            return `${this.firstName} ${this.lastName}`;
+          },
+          getResult() {
+            return this.score >= 60 ? '及格' : '不及格';
+          },
+          getReverseMessage() {
+            return this.message.split(' ').reverse().join(' ');
+          },
+        },
+        computed: {
+          fullName() {
+            return `${this.firstName} ${this.lastName}`;
+          },
+          result() {
+            return this.score >= 60 ? '及格' : '不及格';
+          },
+          reverseMessage() {
+            return this.message.split(' ').reverse().join(' ');
+          },
+        },
+      }).mount('#app');
+    </script>
+  </body>
+</html>
