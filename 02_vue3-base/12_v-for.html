@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id="app"></div>
+  
+  <template id="tmp">
+    <h2>电影列表</h2>
+    <ul>
+      <!-- 遍历数组 -->
+      <li v-for="(movie, index) in movies">{{index + 1}}-{{movie}}</li>
+    </ul>
+    <h2>个人信息</h2>
+    <ul>
+      <!-- 遍历对象 -->
+      <li v-for="(value, key) in profile">{{key}}:{{value}}</li>
+    </ul>
+    <input type="text" v-model="newMovie" />
+    <button @click="addMovie">添加</button>
+  </template>
+  
+  <script src="https://unpkg.com/vue@next"></script>
+  <script>
+    Vue.createApp({
+      template: '#tmp',
+      data() {
+        return {
+          newMovie: '',
+          movies: [
+            '星际穿越',
+            '盗梦空间',
+            '正义联盟',
+            '教父',
+            '低俗小说'
+          ],
+          profile: {
+            name: 'luckyporo',
+            age: 25,
+            job: 'fullstack developer'
+          }
+        }
+      },
+      methods: {
+        addMovie() {
+          this.movies.push(this.newMovie)
+          this.movies = this.movies.filter(m => m.length > 2);
+        }
+      },
+    }).mount('#app')
+  </script>
+</body>
+</html>
+

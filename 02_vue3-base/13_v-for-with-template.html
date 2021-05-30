@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .divider {
+        list-style: none;
+        border-bottom: 1px solid black;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app"></div>
+
+    <template id="tmp">
+      <h2>个人信息</h2>
+      <ul>
+        <template v-for="(value, key) in profile">
+          <li>{{key}}</li>
+          <li>{{value}}</li>
+          <li class="divider"></li>
+        </template>
+      </ul>
+    </template>
+
+    <script src="https://unpkg.com/vue@next"></script>
+    <script>
+      Vue.createApp({
+        template: '#tmp',
+        data() {
+          return {
+            profile: {
+              name: 'luckyporo',
+              age: 25,
+              job: 'fullstack developer',
+            },
+          };
+        },
+        methods: {},
+      }).mount('#app');
+    </script>
+  </body>
+</html>
