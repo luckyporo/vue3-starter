@@ -7,6 +7,7 @@ import { createApp } from 'vue';
 // import App from './06_provider-and-inject/App.vue';
 // import App from './07_mitt/App.vue';
 // import App from './08_slot/App.vue';
-import App from './09_named-slot/App.vue';
+// import App from './09_named-slot/App.vue';
+import App from './10_scoped-slot/App.vue'
 
 createApp(App).mount('#app');
